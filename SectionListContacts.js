@@ -4,11 +4,19 @@ import PropTypes from 'prop-types';
 
 import Row from './Row';
 
-const renderItem = ({ item }) => <Row {...item} />;
-
 const renderSectionHeader = ({ section }) => <Text>{section.title}</Text>;
 
 const SectionListContacts = props => {
+
+  const renderItem = ({ item }) => (
+    <Row
+      {...item} 
+      onSelectContact={contact => {
+        props.onSelectContact(contact)
+      }}
+    />
+  );
+
   const contactsByLetter = props.contacts.reduce((obj, contact) => {
     const firstLetter = contact.name[0].toUpperCase();
     return {

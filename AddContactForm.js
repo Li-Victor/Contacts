@@ -9,8 +9,7 @@ import { Constants } from 'expo';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    paddingTop: Constants.statusBarHeight,
+    flex: 1
   },
   input: {
     borderWidth: 1,

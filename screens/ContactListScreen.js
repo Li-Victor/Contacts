@@ -5,6 +5,21 @@ import { Constants } from 'expo';
 import SectionListContacts from '../SectionListContacts';
 
 export default class ContactListScreen extends React.Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Contacts',
+      headerRight: (
+        <Button
+          title="Add" 
+          color="#a41034"
+          onPress={() => {
+          navigation.navigate('AddContact');
+        }} />
+      )
+    }
+  }
+
   state = {
     showContacts: true,
   };
@@ -34,10 +49,16 @@ export default class ContactListScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="toggle contacts" onPress={this.toggleContacts} />
-        <Button title="add contact" onPress={this.showForm} />
         {this.state.showContacts && (
-          <SectionListContacts contacts={this.props.screenProps.contacts} />
+          <SectionListContacts
+            contacts={this.props.screenProps.contacts}
+            onSelectContact={(contact) => {
+              this.props.navigation.navigate('ContactDetails', {
+                phone: contact.phone,
+                name: contact.name
+              });
+            }}
+          />
         )}
       </View>
     );
